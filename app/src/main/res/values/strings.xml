@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FootFighter</string>
+    <string name="sum">0</string>
+    <string name="tv_info">Steps</string>
 </resources>
