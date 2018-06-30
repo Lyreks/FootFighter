@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
+    android:paddingLeft="16sp"
+    android:paddingRight="16sp"
     tools:context="io.github.lyreks.footfighter.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_info"
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_info"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp">
+
+        <TextView
+            android:id="@+id/tvStepsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5sp"
+            android:text="@string/stepsText"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/tvSteps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stepsTaken"
+            android:textSize="30sp" />
+    </TableRow>
+
 
     <TextView
-        android:id="@+id/tv_steps"
+        android:id="@+id/tvCurrentHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sum"
-        android:textSize="50sp" />
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/currentHealth" />
 
-</LinearLayout>
+</RelativeLayout>

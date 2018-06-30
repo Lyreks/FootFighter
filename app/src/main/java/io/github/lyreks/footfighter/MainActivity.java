@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
-    TextView tv_steps;
+    TextView steps;
+    TextView tvCurrentHealth;
     SensorManager sensorManager;
+    Enemy enemy = new Enemy();
     boolean running = false;
 
     @Override
@@ -21,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv_steps = findViewById(R.id.tv_steps);
+
+        steps = findViewById(R.id.tvSteps);
+        tvCurrentHealth = findViewById(R.id.tvCurrentHealth);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
@@ -45,7 +49,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(running){
-            tv_steps.setText(String.valueOf(event.values[0]));
+            //enemy
+            tvCurrentHealth.setText(String.valueOf(enemy.updateCurrentHealth()));
+            //steps
+            steps.setText(String.valueOf((int)event.values[0]));
         }
     }
 
