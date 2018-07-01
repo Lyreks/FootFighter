@@ -2,5 +2,7 @@
     <string name="app_name">FootFighter</string>
     <string name="stepsTaken">0</string>
     <string name="stepsText">Steps:</string>
-    <string name="currentHealth">TextView</string>
+    <string name="currentHealth">currentHealth</string>
+    <string name="totalHealth">totalHealth</string>
+    <string name="slash">/</string>
 </resources>

@@ -12,13 +12,15 @@ public class Enemy1 implements IEnemy {
         currentHealth = 101;
     }
 
-    public int UpdateCurrentHealth(){
+    public void UpdateHealth(){
         currentHealth--;
+    }
+
+    public int ReturnCurrentHealth(){
         return currentHealth;
     }
 
-    public int UpdateTotalHealth(){
+    public int ReturnTotalHealth(){
         return totalHealth;
     }
-
 }

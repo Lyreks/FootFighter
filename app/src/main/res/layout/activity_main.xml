@@ -31,14 +31,39 @@
             android:textSize="30sp" />
     </TableRow>
 
-
     <TextView
+        android:id="@+id/slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:text="@string/slash"
+        android:textSize="20sp" />
+
+    <!-- Look into removing the RelativeOverlap warning -->
+    <TextView
+
         android:id="@+id/tvCurrentHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@id/slash"
+        android:layout_marginBottom="100sp"
+        android:text="@string/currentHealth"
+        android:textSize="20sp"
+        tools:ignore="RelativeOverlap"
+    />
+
+    <TextView
+        android:id="@+id/tvTotalHealth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/slash"
         android:layout_marginBottom="100dp"
-        android:layout_centerHorizontal="true"
-        android:text="@string/currentHealth" />
+        android:text="@string/totalHealth"
+        android:textSize="20sp" />
 
 </RelativeLayout>
