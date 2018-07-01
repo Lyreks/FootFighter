@@ -10,19 +10,22 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.github.lyreks.footfighter.EnemyClasses.EnemyHandler;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     TextView steps;
     TextView tvCurrentHealth;
     SensorManager sensorManager;
-    Enemy enemy = new Enemy();
+    EnemyHandler enemyHandler;
+    private int[] enemyHealth;
     boolean running = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        enemyHandler = new EnemyHandler();
 
         steps = findViewById(R.id.tvSteps);
         tvCurrentHealth = findViewById(R.id.tvCurrentHealth);
@@ -50,14 +53,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if(running){
             //enemy
-            tvCurrentHealth.setText(String.valueOf(enemy.updateCurrentHealth()));
+            enemyHealth = enemyHandler.Update();
+            tvCurrentHealth.setText(String.valueOf(enemyHealth[0]));
             //steps
             steps.setText(String.valueOf((int)event.values[0]));
         }
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
+    public void onAccuracyChanged(Sensor sensor, int i) {}
 }
