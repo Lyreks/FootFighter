@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             tvEnemyID.setText(String.valueOf(enemyInfo[0]));
             tvEnemyCurrentHealth.setText(String.valueOf(enemyInfo[1]));
             tvEnemyTotalHealth.setText(String.valueOf(enemyInfo[2]));
-            enemyInfo = enemyHandler.Update();
+            enemyHandler.Update();
+            enemyInfo = enemyHandler.ReturnInfo();
             //steps
             steps.setText(String.valueOf((int)event.values[0]));
         }

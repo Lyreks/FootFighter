@@ -10,7 +10,6 @@ public class EnemyHandler {
     private IEnemy currentEnemy;
     //[0] is ID#, [1] is currentHealth, [2] is totalHealth
     private int[] enemyInfo = new int[3];
-    private int numberOfEnemies = 3;
 
     public EnemyHandler(){
         currentEnemy = new Enemy1();
@@ -23,14 +22,13 @@ public class EnemyHandler {
         return enemyInfo;
     }
 
-    public int[] Update(){
+    public void Update(){
         currentEnemy.UpdateHealth();
         if(currentEnemy.ReturnCurrentHealth() <= 0){
             SwitchEnemy();
         }
         enemyInfo[1] = currentEnemy.ReturnCurrentHealth();
         enemyInfo[2] = currentEnemy.ReturnTotalHealth();
-        return enemyInfo;
     }
 
     private void SwitchEnemy(){
