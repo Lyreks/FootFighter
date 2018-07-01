@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView tvTotalHealth;
     SensorManager sensorManager;
     EnemyHandler enemyHandler;
+    private int[] enemyInfo = new int[2];
     boolean running = false;
 
     @Override
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         enemyHandler = new EnemyHandler();
+        enemyInfo = enemyHandler.ReturnInfo();
 
         steps = findViewById(R.id.tvSteps);
         tvCurrentHealth = findViewById(R.id.tvCurrentHealth);
@@ -54,9 +56,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if(running){
             //enemy
-            int[] enemyHealth = enemyHandler.Update();
-            tvCurrentHealth.setText(String.valueOf(enemyHealth[0]));
-            tvTotalHealth.setText(String.valueOf(enemyHealth[1]));
+            tvCurrentHealth.setText(String.valueOf(enemyInfo[0]));
+            tvTotalHealth.setText(String.valueOf(enemyInfo[1]));
+            enemyInfo = enemyHandler.Update();
             //steps
             steps.setText(String.valueOf((int)event.values[0]));
         }

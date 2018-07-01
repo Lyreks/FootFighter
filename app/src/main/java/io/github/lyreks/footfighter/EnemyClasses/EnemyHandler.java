@@ -7,18 +7,22 @@ public class EnemyHandler {
 
     private IEnemy currentEnemy;
     //[0] is currentHealth, [1] is totalHealth
-    private int[] enemyHealth = new int[2];
+    private int[] enemyInfo = new int[2];
 
     public EnemyHandler(){
         currentEnemy = new Enemy1();
-        enemyHealth[0] = currentEnemy.ReturnCurrentHealth();
-        enemyHealth[1] = currentEnemy.ReturnTotalHealth();
+        enemyInfo[0] = currentEnemy.ReturnCurrentHealth();
+        enemyInfo[1] = currentEnemy.ReturnTotalHealth();
+    }
+
+    public int[] ReturnInfo(){
+        return enemyInfo;
     }
 
     public int[] Update(){
         currentEnemy.UpdateHealth();
-        enemyHealth[0] = currentEnemy.ReturnCurrentHealth();
-        enemyHealth[1] = currentEnemy.ReturnTotalHealth();
-        return enemyHealth;
+        enemyInfo[0] = currentEnemy.ReturnCurrentHealth();
+        enemyInfo[1] = currentEnemy.ReturnTotalHealth();
+        return enemyInfo;
     }
 }

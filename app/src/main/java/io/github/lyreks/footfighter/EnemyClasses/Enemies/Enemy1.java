@@ -9,7 +9,7 @@ public class Enemy1 implements IEnemy {
 
     public Enemy1(){
         totalHealth = 100;
-        currentHealth = 101;
+        currentHealth = 100;
     }
 
     public void UpdateHealth(){
