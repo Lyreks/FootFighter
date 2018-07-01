@@ -15,11 +15,12 @@ import io.github.lyreks.footfighter.EnemyClasses.EnemyHandler;
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     TextView steps;
-    TextView tvCurrentHealth;
-    TextView tvTotalHealth;
+    TextView tvEnemyID;
+    TextView tvEnemyCurrentHealth;
+    TextView tvEnemyTotalHealth;
     SensorManager sensorManager;
     EnemyHandler enemyHandler;
-    private int[] enemyInfo = new int[2];
+    private int[] enemyInfo = new int[3];
     boolean running = false;
 
     @Override
@@ -30,8 +31,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         enemyInfo = enemyHandler.ReturnInfo();
 
         steps = findViewById(R.id.tvSteps);
-        tvCurrentHealth = findViewById(R.id.tvCurrentHealth);
-        tvTotalHealth = findViewById(R.id.tvTotalHealth);
+        tvEnemyID = findViewById(R.id.tvEnemyID);
+        tvEnemyCurrentHealth = findViewById(R.id.tvEnemyCurrentHealth);
+        tvEnemyTotalHealth = findViewById(R.id.tvEnemyTotalHealth);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
@@ -56,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent event) {
         if(running){
             //enemy
-            tvCurrentHealth.setText(String.valueOf(enemyInfo[0]));
-            tvTotalHealth.setText(String.valueOf(enemyInfo[1]));
+            tvEnemyID.setText(String.valueOf(enemyInfo[0]));
+            tvEnemyCurrentHealth.setText(String.valueOf(enemyInfo[1]));
+            tvEnemyTotalHealth.setText(String.valueOf(enemyInfo[2]));
             enemyInfo = enemyHandler.Update();
             //steps
             steps.setText(String.valueOf((int)event.values[0]));

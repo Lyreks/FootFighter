@@ -45,7 +45,7 @@
     <!-- Look into removing the RelativeOverlap warning -->
     <TextView
 
-        android:id="@+id/tvCurrentHealth"
+        android:id="@+id/tvEnemyCurrentHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -57,7 +57,7 @@
     />
 
     <TextView
-        android:id="@+id/tvTotalHealth"
+        android:id="@+id/tvEnemyTotalHealth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -65,5 +65,16 @@
         android:layout_marginBottom="100dp"
         android:text="@string/totalHealth"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvEnemyID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        android:gravity="center"
+        android:text="@string/enemyID"
+        android:textSize="30sp" />
 
 </RelativeLayout>

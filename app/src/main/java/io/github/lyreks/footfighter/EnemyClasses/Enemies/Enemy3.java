@@ -2,16 +2,18 @@ package io.github.lyreks.footfighter.EnemyClasses.Enemies;
 
 import io.github.lyreks.footfighter.Interfaces.IEnemy;
 
-public class Enemy1 implements IEnemy {
+public class Enemy3 implements IEnemy {
 
     private int enemyID;
     private int totalHealth;
     private int currentHealth;
+    private boolean damage;
 
-    public Enemy1(){
-        totalHealth = 10;
-        currentHealth = 10;
-        enemyID = 1;
+    public Enemy3(){
+        totalHealth = 30;
+        currentHealth = 30;
+        enemyID = 3;
+        damage = true;
     }
 
     public int GetID(){
@@ -19,7 +21,13 @@ public class Enemy1 implements IEnemy {
     }
 
     public void UpdateHealth(){
-        currentHealth--;
+        if(damage){
+            currentHealth -= 3;
+        } else {
+            currentHealth++;
+        }
+
+        damage = !damage;
     }
 
     public int ReturnCurrentHealth(){

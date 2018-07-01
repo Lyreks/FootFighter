@@ -5,4 +5,5 @@
     <string name="currentHealth">currentHealth</string>
     <string name="totalHealth">totalHealth</string>
     <string name="slash">/</string>
+    <string name="enemyID">ID</string>
 </resources>
