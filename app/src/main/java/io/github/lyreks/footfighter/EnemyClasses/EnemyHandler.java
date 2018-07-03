@@ -11,6 +11,25 @@ public class EnemyHandler {
     //[0] is ID#, [1] is currentHealth, [2] is totalHealth
     private int[] enemyInfo = new int[3];
 
+    public EnemyHandler(int[] enemyConstructionState){
+        switch (enemyConstructionState[0]) {
+            case 1:
+                currentEnemy = new Enemy1(enemyConstructionState);
+                break;
+            case 2:
+                currentEnemy = new Enemy2(enemyConstructionState);
+                break;
+            case 3:
+                currentEnemy = new Enemy3(enemyConstructionState);
+                break;
+            default:
+                break;
+        }
+        enemyInfo[0] = currentEnemy.GetID();
+        enemyInfo[1] = currentEnemy.ReturnCurrentHealth();
+        enemyInfo[2] = currentEnemy.ReturnTotalHealth();
+    }
+
     public EnemyHandler(){
         currentEnemy = new Enemy1();
         enemyInfo[0] = currentEnemy.GetID();
@@ -27,6 +46,7 @@ public class EnemyHandler {
         if(currentEnemy.ReturnCurrentHealth() <= 0){
             SwitchEnemy();
         }
+        enemyInfo[0] = currentEnemy.GetID();
         enemyInfo[1] = currentEnemy.ReturnCurrentHealth();
         enemyInfo[2] = currentEnemy.ReturnTotalHealth();
     }

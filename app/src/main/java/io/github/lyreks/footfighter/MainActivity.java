@@ -1,6 +1,7 @@
 package io.github.lyreks.footfighter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -20,14 +21,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView tvEnemyTotalHealth;
     SensorManager sensorManager;
     EnemyHandler enemyHandler;
+    //info of array values in EnemyHandler
     private int[] enemyInfo = new int[3];
     boolean running = false;
 
+    //Activity launched for the first time. Initialize here.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState != null){
+            enemyInfo = savedInstanceState.getIntArray("EnemyInfo");
+            assert enemyInfo != null;
+            enemyHandler = new EnemyHandler(enemyInfo);
+        } else {
+            enemyHandler = new EnemyHandler();
+        }
         setContentView(R.layout.activity_main);
-        enemyHandler = new EnemyHandler();
+        //enemyInfo = savedInstanceState.getIntArray("EnemyInfo");
+
         enemyInfo = enemyHandler.ReturnInfo();
 
         steps = findViewById(R.id.tvSteps);
@@ -38,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
+    // User returns to the activity after another activity comes into foreground. (onPause)
     protected void onResume(){
         super.onResume();
         running = true;
@@ -49,9 +61,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+
     public void onPause(){
         super.onPause();
         running = false;
+    }
+
+    // User navigates to the activity after it's no longer visible (onStop).
+
+    //Saves instance state??????????
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("EnemyInfo", enemyInfo);
     }
 
     @Override
@@ -63,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             tvEnemyTotalHealth.setText(String.valueOf(enemyInfo[2]));
             enemyHandler.Update();
             enemyInfo = enemyHandler.ReturnInfo();
+
             //steps
             steps.setText(String.valueOf((int)event.values[0]));
         }
@@ -70,4 +93,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {}
+
 }

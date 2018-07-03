@@ -4,37 +4,32 @@ import io.github.lyreks.footfighter.Interfaces.IEnemy;
 
 public class Enemy3 implements IEnemy {
 
-    private int enemyID;
-    private int totalHealth;
-    private int currentHealth;
-    private boolean damage;
+    //[0] is ID#, [1] is currentHealth, [2] is totalHealth
+    private int[] enemyInfo = new int[3];
 
     public Enemy3(){
-        totalHealth = 30;
-        currentHealth = 30;
-        enemyID = 3;
-        damage = true;
+        enemyInfo[0] = 3;
+        enemyInfo[1] = 30;
+        enemyInfo[2] = 30;
+    }
+
+    public Enemy3(int[] enemyConstructionState){
+        enemyInfo = enemyConstructionState;
     }
 
     public int GetID(){
-        return enemyID;
+        return enemyInfo[0];
     }
 
     public void UpdateHealth(){
-        if(damage){
-            currentHealth -= 3;
-        } else {
-            currentHealth++;
-        }
-
-        damage = !damage;
+        enemyInfo[1] -= 3;
     }
 
     public int ReturnCurrentHealth(){
-        return currentHealth;
+        return enemyInfo[1];
     }
 
     public int ReturnTotalHealth(){
-        return totalHealth;
+        return enemyInfo[2];
     }
 }
