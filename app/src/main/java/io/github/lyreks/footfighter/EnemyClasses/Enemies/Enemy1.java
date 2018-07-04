@@ -1,35 +1,42 @@
 package io.github.lyreks.footfighter.EnemyClasses.Enemies;
 
+import io.github.lyreks.footfighter.EnemyClasses.EnemyInfo;
 import io.github.lyreks.footfighter.Interfaces.IEnemy;
 
 public class Enemy1 implements IEnemy {
 
-    //[0] is ID#, [1] is currentHealth, [2] is totalHealth
-    private int[] enemyInfo = new int[3];
+    private EnemyInfo enemyInfo;
 
     public Enemy1(){
-        enemyInfo[0] = 1;
-        enemyInfo[1] = 10;
-        enemyInfo[2] = 10;
+        enemyInfo = new EnemyInfo();
+        enemyInfo.setID(1);
+        enemyInfo.setCurrentHealth(10);
+        enemyInfo.setTotalHealth(10);
     }
 
-    public Enemy1(int[] enemyConstructionState){
-        enemyInfo = enemyConstructionState;
-    }
-
-    public int GetID(){
-        return enemyInfo[0];
+    public Enemy1(EnemyInfo enemyConstruct){
+        enemyInfo = enemyConstruct;
     }
 
     public void UpdateHealth(){
-        enemyInfo[1]--;
+        int num = enemyInfo.getCurrentHealth();
+        num--;
+        enemyInfo.setCurrentHealth(num);
     }
 
-    public int ReturnCurrentHealth(){
-        return enemyInfo[1];
+    public EnemyInfo GetInfo(){
+        return enemyInfo;
     }
 
-    public int ReturnTotalHealth(){
-        return enemyInfo[2];
+    public int GetID(){
+        return enemyInfo.getID();
+    }
+
+    public int GetCurrentHealth(){
+        return enemyInfo.getCurrentHealth();
+    }
+
+    public int GetTotalHealth(){
+        return enemyInfo.getTotalHealth();
     }
 }

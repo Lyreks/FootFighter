@@ -1,7 +1,7 @@
 package io.github.lyreks.footfighter;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import io.github.lyreks.footfighter.Database.AppDatabase;
 import io.github.lyreks.footfighter.EnemyClasses.EnemyHandler;
+import io.github.lyreks.footfighter.EnemyClasses.EnemyInfo;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -21,25 +23,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     TextView tvEnemyTotalHealth;
     SensorManager sensorManager;
     EnemyHandler enemyHandler;
-    //info of array values in EnemyHandler
-    private int[] enemyInfo = new int[3];
+    private EnemyInfo enemyInfo;
     boolean running = false;
 
     //Activity launched for the first time. Initialize here.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState != null){
-            enemyInfo = savedInstanceState.getIntArray("EnemyInfo");
-            assert enemyInfo != null;
-            enemyHandler = new EnemyHandler(enemyInfo);
-        } else {
-            enemyHandler = new EnemyHandler();
-        }
-        setContentView(R.layout.activity_main);
-        //enemyInfo = savedInstanceState.getIntArray("EnemyInfo");
+        enemyInfo = new EnemyInfo();
+        enemyHandler = new EnemyHandler();
+        enemyInfo = enemyHandler.GetInfo();
 
-        enemyInfo = enemyHandler.ReturnInfo();
+        setContentView(R.layout.activity_main);
+
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "database-name").build();
 
         steps = findViewById(R.id.tvSteps);
         tvEnemyID = findViewById(R.id.tvEnemyID);
@@ -61,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-
     public void onPause(){
         super.onPause();
         running = false;
@@ -69,22 +65,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     // User navigates to the activity after it's no longer visible (onStop).
 
-    //Saves instance state??????????
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putIntArray("EnemyInfo", enemyInfo);
-    }
-
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(running){
             //enemy
-            tvEnemyID.setText(String.valueOf(enemyInfo[0]));
-            tvEnemyCurrentHealth.setText(String.valueOf(enemyInfo[1]));
-            tvEnemyTotalHealth.setText(String.valueOf(enemyInfo[2]));
+            tvEnemyID.setText(String.valueOf(enemyInfo.getID()));
+            tvEnemyCurrentHealth.setText(String.valueOf(enemyInfo.getCurrentHealth()));
+            tvEnemyTotalHealth.setText(String.valueOf(enemyInfo.getTotalHealth()));
             enemyHandler.Update();
-            enemyInfo = enemyHandler.ReturnInfo();
+            enemyInfo = enemyHandler.GetInfo();
 
             //steps
             steps.setText(String.valueOf((int)event.values[0]));
