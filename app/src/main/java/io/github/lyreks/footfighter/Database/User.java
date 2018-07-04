@@ -1,20 +1,24 @@
 package io.github.lyreks.footfighter.Database;
 
 import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-@Entity
+import io.github.lyreks.footfighter.EnemyClasses.EnemyInfo;
+
+@Entity(tableName = "user")
 public class User {
     @PrimaryKey
     private int uid;
 
-    @ColumnInfo(name = "first_name")
-    private String firstName;
+    @Embedded
+    private EnemyInfo enemyInfo;
 
-    @ColumnInfo(name = "last_name")
-    private String lastName;
 
+    // Getters and setters required for Room to work.
+
+    //uid get & set
     public int getUid(){
         return uid;
     }
@@ -22,20 +26,13 @@ public class User {
         uid = value;
     }
 
-    public String getFirstName() {
-        return firstName;
+    //enemyInfo get & set
+    public EnemyInfo getEnemyInfo() {
+        return enemyInfo;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setEnemyInfo(EnemyInfo enemyInfo) {
+        this.enemyInfo = enemyInfo;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-    // Getters and setters are ignored for brevity,
-    // but they're required for Room to work.
 }
 
